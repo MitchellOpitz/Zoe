@@ -4,9 +4,11 @@ public class QController : MonoBehaviour
 {
     public float speed = 10f;
     public float maxDistance = 5f;
+    public float destroyTime = 2f; // Time in seconds before projectile is destroyed
 
     private Vector3 targetPosition;
     private Vector3 startPosition;
+    private float lifetime = 0f; // Time in seconds since projectile was created
 
     void Start()
     {
@@ -15,6 +17,9 @@ public class QController : MonoBehaviour
 
     void Update()
     {
+        // Increment lifetime
+        lifetime += Time.deltaTime;
+
         // Move towards target position
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
@@ -25,6 +30,12 @@ public class QController : MonoBehaviour
             Vector3 directionToStartPosition = (startPosition - transform.position).normalized;
             transform.position = startPosition + (directionToStartPosition * maxDistance);
             speed = 0f;
+        }
+
+        // Check if projectile has lived longer than destroyTime
+        if (lifetime >= destroyTime)
+        {
+            Destroy(gameObject);
         }
     }
 

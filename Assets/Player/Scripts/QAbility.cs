@@ -6,13 +6,16 @@ public class QAbility : MonoBehaviour
     public Transform spawnPoint;
     public float maxDistance = 5f;
     public float projectileSpeed = 10f;
+    public float cooldownTime = 2f; // Cooldown time in seconds
 
     private Vector3 targetPosition;
+    private bool isOnCooldown = false;
+    private float cooldownTimer = 0f;
 
     void Update()
     {
-        // Check for input
-        if (Input.GetKeyDown(KeyCode.Q))
+        // Check for input and cooldown timer
+        if (!isOnCooldown && Input.GetKeyDown(KeyCode.Q))
         {
             // Calculate target position
             targetPosition = CalculateTargetPosition();
@@ -22,6 +25,21 @@ public class QAbility : MonoBehaviour
             QController projectileController = projectile.GetComponent<QController>();
             projectileController.SetTargetPosition(targetPosition);
             projectileController.SetSpeed(projectileSpeed);
+
+            // Start cooldown timer
+            isOnCooldown = true;
+            cooldownTimer = cooldownTime;
+        }
+
+        // Update cooldown timer
+        if (isOnCooldown)
+        {
+            cooldownTimer -= Time.deltaTime;
+
+            if (cooldownTimer <= 0f)
+            {
+                isOnCooldown = false;
+            }
         }
     }
 

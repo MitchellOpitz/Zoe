@@ -97,3 +97,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   maxDistance: 5
+  destroyTime: 2
