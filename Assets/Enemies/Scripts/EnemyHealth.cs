@@ -26,6 +26,8 @@ public class EnemyHealth : MonoBehaviour
     private void Die()
     {
         // TODO: Perform death animation and other death-related tasks
+        PlayerManager player = GameObject.FindObjectOfType<PlayerManager>();
+        player.GainExperience(100);
         Destroy(gameObject);
     }
 }
