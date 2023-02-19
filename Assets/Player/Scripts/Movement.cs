@@ -42,6 +42,12 @@ public class Movement : MonoBehaviour
         float vertExtent = Camera.main.orthographicSize;
         float horizExtent = vertExtent * Screen.width / Screen.height;
 
+        // Subtract half the player's size from clamping calculations
+        float playerWidth = transform.localScale.x / 2f;
+        float playerHeight = transform.localScale.y / 2f;
+        horizExtent -= playerWidth;
+        vertExtent -= playerHeight;
+
         // Clamp x position to camera bounds
         float clampedX = Mathf.Clamp(targetPosition.x, cameraPosition.x - horizExtent, cameraPosition.x + horizExtent);
         clampedTargetPosition.x = clampedX;
