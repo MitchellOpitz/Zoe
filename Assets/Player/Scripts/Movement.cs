@@ -7,14 +7,12 @@ public class Movement : MonoBehaviour
     public float moveSpeed = 5f;
 
     private Vector3 targetPosition;
-    private bool isMoving = false;
 
     void Update()
     {
         if (Input.GetMouseButtonDown(1))
         {
             SetTargetPosition();
-            isMoving = true;
         }
 
         if (Input.GetMouseButton(1))
@@ -63,5 +61,10 @@ public class Movement : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
+    }
+
+    public void RemoveTargetPosition()
+    {
+        targetPosition = transform.position;
     }
 }
