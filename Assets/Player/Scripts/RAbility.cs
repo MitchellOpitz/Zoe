@@ -9,18 +9,21 @@ public class RAbility : MonoBehaviour
     public float portalDistance = 5f;
     public float portalDelay = 0.1f;
     public float waitTime = 1f;
+    public float cooldownTime = 5f; // The time in seconds before the ability can be used again
 
     private Vector3 targetPosition;
     private GameObject portal1;
     private GameObject portal2;
+    private float lastAbilityTime = -Mathf.Infinity; // Initialize to negative infinity to allow first use
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && Time.time - lastAbilityTime > cooldownTime)
         {
             CreatePortal(transform.position);
             DisableMovement();
             Invoke("CreateSecondPortal", portalDelay);
+            lastAbilityTime = Time.time;
         }
     }
 
