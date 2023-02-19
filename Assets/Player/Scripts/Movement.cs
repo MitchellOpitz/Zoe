@@ -35,19 +35,27 @@ public class Movement : MonoBehaviour
 
     void MovePlayer()
     {
-        if (isMoving)
+        Vector3 clampedTargetPosition = targetPosition;
+        Vector3 cameraPosition = Camera.main.transform.position;
+
+        // Get camera bounds
+        float vertExtent = Camera.main.orthographicSize;
+        float horizExtent = vertExtent * Screen.width / Screen.height;
+
+        // Clamp x position to camera bounds
+        float clampedX = Mathf.Clamp(targetPosition.x, cameraPosition.x - horizExtent, cameraPosition.x + horizExtent);
+        clampedTargetPosition.x = clampedX;
+
+        // Clamp y position to camera bounds
+        float clampedY = Mathf.Clamp(targetPosition.y, cameraPosition.y - vertExtent, cameraPosition.y + vertExtent);
+        clampedTargetPosition.y = clampedY;
+
+        if (Vector3.Distance(transform.position, clampedTargetPosition) > 0.1f)
         {
-            if (Vector3.Distance(transform.position, targetPosition) > 0.1f)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-                Vector3 direction = (targetPosition - transform.position).normalized;
-                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            }
-            else
-            {
-                isMoving = false;
-            }
+            transform.position = Vector3.MoveTowards(transform.position, clampedTargetPosition, moveSpeed * Time.deltaTime);
+            Vector3 direction = (clampedTargetPosition - transform.position).normalized;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
     }
 }
