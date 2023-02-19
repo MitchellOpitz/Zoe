@@ -10,7 +10,6 @@ public class RAbility : MonoBehaviour
     public float portalDelay = 0.1f;
     public float waitTime = 1f;
 
-    private bool isMoving = false;
     private Vector3 targetPosition;
     private GameObject portal1;
     private GameObject portal2;
@@ -60,14 +59,12 @@ public class RAbility : MonoBehaviour
 
     void DisableMovement()
     {
-        isMoving = true;
         targetPosition = transform.position;
         GetComponent<Movement>().enabled = false;
     }
 
     void DestroyPortalsAndEnableMovement()
     {
-        isMoving = false;
         GetComponent<Movement>().enabled = true;
         GetComponent<Movement>().RemoveTargetPosition();
 

@@ -5,6 +5,7 @@ public class QController : MonoBehaviour
     public float speed = 10f;
     public float maxDistance = 5f;
     public float destroyTime = 2f; // Time in seconds before projectile is destroyed
+    public int damage = 1;
 
     private Vector3 targetPosition;
     private Vector3 startPosition;
@@ -52,5 +53,23 @@ public class QController : MonoBehaviour
     {
         // Set new speed
         speed = newSpeed;
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // Check if collided with an enemy
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            // Get the enemy's health script
+            EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
+
+            // If the enemy has health script, damage it
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(damage);
+            }
+
+            // Destroy the projectile
+            Destroy(gameObject);
+        }
     }
 }
