@@ -37,8 +37,7 @@ public class EnemyMovement : MonoBehaviour
         switch (enemyType)
         {
             case EnemyType.Type1:
-                targetPosition = targetPos;
-                targetPosition = new Vector3(Random.Range(-10f, 10f), Random.Range(-5f, 5f), 0f);
+                Type1Movement();
                 break;
             case EnemyType.Type2:
                 targetPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), 0f);
@@ -53,5 +52,10 @@ public class EnemyMovement : MonoBehaviour
                 targetPosition = new Vector3(Random.Range(-10f, 10f), 0f, 0f);
                 break;
         }
+    }
+
+    private void Type1Movement()
+    {
+        targetPosition = new Vector3(Random.Range(-10f, 10f), Random.Range(-5f, 5f), 0f);
     }
 }
