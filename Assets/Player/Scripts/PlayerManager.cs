@@ -6,10 +6,16 @@ public class PlayerManager : MonoBehaviour
     public int SkillPoints { get; private set; } = 0;
     public int Experience { get; private set; } = 0;
     public int ExperienceToLevelUp { get; private set; } = 100;
+    public int Score { get; private set; } = 0;
 
     public void AddSkillPoints(int amount)
     {
         SkillPoints += amount;
+    }
+
+    public void AddScore(int amount)
+    {
+        Score += amount;
     }
 
     public void GainExperience(int amount)

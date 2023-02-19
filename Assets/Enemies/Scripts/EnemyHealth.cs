@@ -28,6 +28,7 @@ public class EnemyHealth : MonoBehaviour
         // TODO: Perform death animation and other death-related tasks
         PlayerManager player = GameObject.FindObjectOfType<PlayerManager>();
         player.GainExperience(100);
+        player.AddScore(100);
         Destroy(gameObject);
     }
 }
