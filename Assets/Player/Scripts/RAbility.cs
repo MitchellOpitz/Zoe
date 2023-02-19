@@ -10,6 +10,7 @@ public class RAbility : MonoBehaviour
     public float portalDelay = 0.1f;
     public float waitTime = 1f;
     public float cooldownTime = 5f; // The time in seconds before the ability can be used again
+    public bool isOnCooldown = false;
 
     private Vector3 targetPosition;
     private GameObject portal1;
@@ -24,6 +25,12 @@ public class RAbility : MonoBehaviour
             DisableMovement();
             Invoke("CreateSecondPortal", portalDelay);
             lastAbilityTime = Time.time;
+            isOnCooldown = true;
+        }
+
+        if (Time.time - lastAbilityTime > cooldownTime)
+        {
+            isOnCooldown = false;
         }
     }
 

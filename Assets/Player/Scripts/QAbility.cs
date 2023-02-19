@@ -9,7 +9,7 @@ public class QAbility : MonoBehaviour
     public float cooldownTime = 2f; // Cooldown time in seconds
 
     private Vector3 targetPosition;
-    private bool isOnCooldown = false;
+    public bool isOnCooldown = false;
     private float cooldownTimer = 0f;
 
     void Update()
