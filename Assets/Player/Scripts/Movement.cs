@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-
     public float moveSpeed = 5f;
 
     private Vector3 targetPosition;
+    private bool isMoving = false;
 
     void Update()
     {
         if (Input.GetMouseButtonDown(1))
+        {
+            SetTargetPosition();
+            isMoving = true;
+        }
+
+        if (Input.GetMouseButton(1))
         {
             SetTargetPosition();
         }
@@ -29,12 +35,19 @@ public class Movement : MonoBehaviour
 
     void MovePlayer()
     {
-        if (Vector3.Distance(transform.position, targetPosition) > 0.1f)
+        if (isMoving)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-            Vector3 direction = (targetPosition - transform.position).normalized;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            if (Vector3.Distance(transform.position, targetPosition) > 0.1f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+                Vector3 direction = (targetPosition - transform.position).normalized;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            }
+            else
+            {
+                isMoving = false;
+            }
         }
     }
 }
