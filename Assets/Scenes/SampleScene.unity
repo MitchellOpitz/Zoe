@@ -168,7 +168,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 2002688430}
   spawnDistance: 1.25
-  rotationSpeed: 100
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,6 +286,7 @@ GameObject:
   - component: {fileID: 2002688430}
   - component: {fileID: 2002688429}
   - component: {fileID: 2002688428}
+  - component: {fileID: 2002688431}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -373,3 +373,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2002688431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002688427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8ba1ed7d489eb43ada7755b242c100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 5433476431560341044, guid: a1557f5fa0eefe447aaec5a035048fbb, type: 3}
+  spawnPoint: {fileID: 507840998}
+  maxDistance: 7
+  projectileSpeed: 10

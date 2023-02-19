@@ -4,7 +4,6 @@ public class SpawnPointController : MonoBehaviour
 {
     public Transform playerTransform;
     public float spawnDistance = 5f;
-    public float rotationSpeed = 5f;
 
     private Vector3 targetPosition;
 
@@ -18,15 +17,10 @@ public class SpawnPointController : MonoBehaviour
         // Calculate target position
         targetPosition = CalculateTargetPosition();
 
-        // Rotate towards target position
-        Vector3 targetDirection = targetPosition - playerTransform.position;
-        targetDirection.z = 0f;
-        transform.rotation = Quaternion.LookRotation(Vector3.forward, targetDirection);
-
         // Move towards target position
-        Vector3 newPosition = playerTransform.position + (targetDirection.normalized * spawnDistance);
-        newPosition.z = transform.position.z;
-        transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * rotationSpeed);
+        Vector3 newPosition = playerTransform.position + (targetPosition - playerTransform.position).normalized * spawnDistance;
+        newPosition.z = 0f;
+        transform.position = newPosition;
     }
 
     void OnDrawGizmosSelected()
