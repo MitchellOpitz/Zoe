@@ -21,9 +21,7 @@ public class PlayerManager : MonoBehaviour
         {
             // Level up and reset experience
             Level++;
-            Debug.Log("Level up!  Current level: " + Level);
             SkillPoints++;
-            Debug.Log("Skill points available: " + SkillPoints);
             Experience -= ExperienceToLevelUp;
             ExperienceToLevelUp = Mathf.RoundToInt(ExperienceToLevelUp * 1.1f); // Increase experience needed to level up by 10%
         }
