@@ -26,6 +26,11 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
+        if(enemyType == EnemyType.Type2)
+        {
+            targetPosition = GameObject.Find("Player").transform.position;
+        }
+
         if (!isStunned)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
@@ -45,6 +50,7 @@ public class EnemyMovement : MonoBehaviour
                 Type1Movement();
                 break;
             case EnemyType.Type2:
+                Type2Movement();
                 break;
             case EnemyType.Type3:
                 break;
@@ -67,6 +73,11 @@ public class EnemyMovement : MonoBehaviour
             // Vertical
             targetPosition = transform.position + new Vector3(0, 30f, 0);
         }
+    }
+
+    private void Type2Movement()
+    {
+        targetPosition = GameObject.Find("Player").transform.position;
     }
 
     public void Stun(int seconds)
