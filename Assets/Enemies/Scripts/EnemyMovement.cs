@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -18,18 +17,21 @@ public class EnemyMovement : MonoBehaviour
 
     private Vector3 targetPosition;
     private bool isStunned = false;
+    private bool moveHorizontal;
 
     void Start()
     {
+        float randomNumber = Random.Range(0, 100);
+        Debug.Log(randomNumber);
+        bool moveHorizontal = randomNumber < 50;
+        Debug.Log(moveHorizontal);
         SetTargetPosition(targetPosition);
     }
 
     void Update()
     {
-        if(enemyType == EnemyType.Type2)
-        {
-            targetPosition = GameObject.Find("Player").transform.position;
-        }
+        Type2Movement();
+        Type3Movement();
 
         if (!isStunned)
         {
@@ -53,6 +55,7 @@ public class EnemyMovement : MonoBehaviour
                 Type2Movement();
                 break;
             case EnemyType.Type3:
+                Type3Movement();
                 break;
             case EnemyType.Type4:
                 break;
@@ -63,8 +66,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Type1Movement()
     {
-        bool randomBool = UnityEngine.Random.Range(0, 2) == 0;
-        if (randomBool)
+        if (moveHorizontal)
         {
             // Horizontal
             targetPosition = transform.position + new Vector3(30f, 0, 0);
@@ -77,7 +79,30 @@ public class EnemyMovement : MonoBehaviour
 
     private void Type2Movement()
     {
-        targetPosition = GameObject.Find("Player").transform.position;
+        if (enemyType == EnemyType.Type2)
+        {
+            targetPosition = GameObject.Find("Player").transform.position;
+        }
+    }
+
+    private void Type3Movement()
+    {
+        float amplitude = 25f;
+        float frequency = 5f;
+        float sineWaveValue = Mathf.Sin(Time.time * frequency) * amplitude;
+
+        if (enemyType == EnemyType.Type3)
+        {
+            Vector3 newPosition = transform.position;
+
+            if (moveHorizontal)
+            {
+                targetPosition = transform.position + new Vector3(30f, sineWaveValue, 0);
+            } else
+            {
+                targetPosition = transform.position + new Vector3(sineWaveValue, 30f, 0);
+            }
+        }
     }
 
     public void Stun(int seconds)
