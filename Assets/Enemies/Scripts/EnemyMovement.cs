@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class EnemyMovement : MonoBehaviour
     public float speed = 5f;
 
     private Vector3 targetPosition;
+    private bool isStunned = false;
 
     void Start()
     {
@@ -24,7 +26,10 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        if (!isStunned)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        }
 
         if (transform.position == targetPosition)
         {
@@ -57,5 +62,21 @@ public class EnemyMovement : MonoBehaviour
     private void Type1Movement()
     {
         targetPosition = new Vector3(Random.Range(-10f, 10f), Random.Range(-5f, 5f), 0f);
+    }
+    public void Stun(int seconds)
+    {
+        if (!isStunned)
+        {
+            isStunned = true;
+            // Disable movement and other actions here
+            StartCoroutine(RecoverFromStun(seconds));
+        }
+    }
+
+    private IEnumerator RecoverFromStun(int seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        // Enable movement and other actions here
+        isStunned = false;
     }
 }

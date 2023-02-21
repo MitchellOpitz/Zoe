@@ -53,6 +53,9 @@ public class CooldownUI : MonoBehaviour
             case AbilityKey.Q:
                 isOnCooldown = FindObjectOfType<QAbility>().isOnCooldown;
                 break;
+            case AbilityKey.E:
+                isOnCooldown = FindObjectOfType<EAbility>().isOnCooldown;
+                break;
             case AbilityKey.R:
                 isOnCooldown = FindObjectOfType<RAbility>().isOnCooldown;
                 break;

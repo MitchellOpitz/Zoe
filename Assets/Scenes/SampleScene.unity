@@ -1837,7 +1837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 4119176367516282819, guid: 9c1debd8fc6f7334c92300d2a4fb6d64, type: 3}
-  spawnDelay: 2
+  spawnDelay: 1
   spawnDistance: 10
 --- !u!4 &1740227618
 Transform:
@@ -1865,6 +1865,7 @@ GameObject:
   - component: {fileID: 2002688429}
   - component: {fileID: 2002688428}
   - component: {fileID: 2002688431}
+  - component: {fileID: 2002688434}
   - component: {fileID: 2002688432}
   - component: {fileID: 2002688433}
   m_Layer: 0
@@ -2002,6 +2003,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70e0e728b63eb7e4d9c359013bb3848a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2002688434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002688427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2dd304a0f8096d4a8173acf7ea5b545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProjectilePrefab: {fileID: 9034521116536929012, guid: 0014d0e437d037a4b800103ad695dd82, type: 3}
+  ProjectileSpawnPoint: {fileID: 507840998}
+  ProjectileSpeed: 10
+  MaxTravelDistance: 10
+  CooldownTime: 3
+  AreaOfEffectRadius: 5
+  isOnCooldown: 0
 --- !u!1 &2055886936
 GameObject:
   m_ObjectHideFlags: 0
