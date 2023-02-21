@@ -11,9 +11,24 @@ public class QAbility : MonoBehaviour
     private Vector3 targetPosition;
     public bool isOnCooldown = false;
     private float cooldownTimer = 0f;
+    private bool Q1Started = false;
+    private GameObject projectile;
 
     void Update()
     {
+
+        if (Q1Started && Input.GetKeyDown(KeyCode.Q))
+        {
+            Debug.Log("Pressed 2nd time.");
+            Q1Started = false;
+            // Calculate target position
+            targetPosition = CalculateTargetPosition();
+            QController projectileController = projectile.GetComponent<QController>();
+            projectileController.SetTargetPosition(targetPosition);
+            projectileController.SetSpeed(projectileSpeed);
+            StartCooldownTimer();
+        }
+
         // Check for input and cooldown timer
         if (!isOnCooldown && Input.GetKeyDown(KeyCode.Q))
         {
@@ -21,14 +36,12 @@ public class QAbility : MonoBehaviour
             targetPosition = CalculateTargetPosition();
 
             // Spawn projectile
-            GameObject projectile = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            projectile = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
             QController projectileController = projectile.GetComponent<QController>();
             projectileController.SetTargetPosition(targetPosition);
             projectileController.SetSpeed(projectileSpeed);
 
-            // Start cooldown timer
-            isOnCooldown = true;
-            cooldownTimer = cooldownTime;
+            Q1Started = true;
         }
 
         // Update cooldown timer
@@ -39,8 +52,16 @@ public class QAbility : MonoBehaviour
             if (cooldownTimer <= 0f)
             {
                 isOnCooldown = false;
+                Q1Started = false;
             }
         }
+    }
+
+    private void StartCooldownTimer()
+    {
+        // Start cooldown timer
+        isOnCooldown = true;
+        cooldownTimer = cooldownTime;
     }
 
     void OnDrawGizmosSelected()
