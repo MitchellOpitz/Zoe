@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -20,7 +21,6 @@ public class EnemyMovement : MonoBehaviour
 
     void Start()
     {
-        targetPosition = transform.position;
         SetTargetPosition(targetPosition);
     }
 
@@ -33,7 +33,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (transform.position == targetPosition)
         {
-            SetTargetPosition(targetPosition);
+            DestroyImmediate(gameObject);
         }
     }
 
@@ -45,24 +45,30 @@ public class EnemyMovement : MonoBehaviour
                 Type1Movement();
                 break;
             case EnemyType.Type2:
-                targetPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), 0f);
                 break;
             case EnemyType.Type3:
-                targetPosition = new Vector3(Random.Range(-10f, 10f), Random.Range(-2f, 2f), 0f);
                 break;
             case EnemyType.Type4:
-                targetPosition = new Vector3(Random.Range(-2f, 2f), Random.Range(-10f, 10f), 0f);
                 break;
             case EnemyType.Type5:
-                targetPosition = new Vector3(Random.Range(-10f, 10f), 0f, 0f);
                 break;
         }
     }
 
     private void Type1Movement()
     {
-        targetPosition = new Vector3(Random.Range(-10f, 10f), Random.Range(-5f, 5f), 0f);
+        bool randomBool = UnityEngine.Random.Range(0, 2) == 0;
+        if (randomBool)
+        {
+            // Horizontal
+            targetPosition = transform.position + new Vector3(30f, 0, 0);
+        } else
+        {
+            // Vertical
+            targetPosition = transform.position + new Vector3(0, 30f, 0);
+        }
     }
+
     public void Stun(int seconds)
     {
         if (!isStunned)
