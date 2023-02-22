@@ -22,20 +22,25 @@ public class UpgradeMenu : MonoBehaviour
         {
             if (!menuOpen)
             {
-                // Pause gameplay
-                Time.timeScale = 0;
-
-                // Show the upgrade panel
-                upgradePanel.SetActive(true);
-
-                // Disable player movement and abilities
-                ToggleAbilities(false);
+                OpenUpgradePanel();
             } else
             {
                 Debug.Log("Closed.");
                 HideUpgradePanel();
             }
         } 
+    }
+
+    public void OpenUpgradePanel()
+    {
+        // Pause gameplay
+        Time.timeScale = 0;
+
+        // Show the upgrade panel
+        upgradePanel.SetActive(true);
+
+        // Disable player movement and abilities
+        ToggleAbilities(false);
     }
 
     void HideUpgradePanel()
