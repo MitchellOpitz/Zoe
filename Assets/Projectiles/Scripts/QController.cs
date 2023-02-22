@@ -6,6 +6,7 @@ public class QController : MonoBehaviour
     public float maxDistance = 5f;
     public float destroyTime = 2f; // Time in seconds before projectile is destroyed
     public int damage = 1;
+    public GameObject splashDamage;
 
     private Vector3 targetPosition;
     private Vector3 startPosition;
@@ -68,8 +69,11 @@ public class QController : MonoBehaviour
                 enemyHealth.TakeDamage(damage);
             }
 
+            Instantiate(splashDamage, transform.position, Quaternion.identity);
+
             // Destroy the projectile
             Destroy(gameObject);
+
         }
     }
 }
