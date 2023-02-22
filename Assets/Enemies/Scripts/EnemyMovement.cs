@@ -22,14 +22,13 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         float randomNumber = Random.Range(0, 100);
-        Debug.Log(randomNumber);
-        bool moveHorizontal = randomNumber < 50;
-        Debug.Log(moveHorizontal);
-        SetTargetPosition(targetPosition);
+        moveHorizontal = (float)randomNumber < 50f;
+        SetTargetPosition();
     }
 
     void Update()
     {
+        Type1Movement();
         Type2Movement();
         Type3Movement();
 
@@ -44,7 +43,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    public void SetTargetPosition(Vector3 targetPos)
+    public void SetTargetPosition()
     {
         switch (enemyType)
         {

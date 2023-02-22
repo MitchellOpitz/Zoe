@@ -29,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
         EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
         if (enemyMovement != null)
         {
-            enemyMovement.SetTargetPosition(GetRandomTargetPosition());
+            enemyMovement.SetTargetPosition();
         }
     }
 
@@ -55,19 +55,5 @@ public class EnemySpawner : MonoBehaviour
             default:
                 return Vector3.zero;
         }
-    }
-
-    Vector3 GetRandomTargetPosition()
-    {
-        // Get camera clamp dimensions
-        float cameraHeight = 2f * mainCamera.orthographicSize;
-        float cameraWidth = cameraHeight * mainCamera.aspect;
-        Vector2 cameraPosition = mainCamera.transform.position;
-
-        // Choose random target position within camera clamp distance
-        float x = Random.Range(cameraPosition.x - cameraWidth / 2f, cameraPosition.x + cameraWidth / 2f);
-        float y = Random.Range(cameraPosition.y - cameraHeight / 2f, cameraPosition.y + cameraHeight / 2f);
-
-        return new Vector3(x, y, 0f);
     }
 }
