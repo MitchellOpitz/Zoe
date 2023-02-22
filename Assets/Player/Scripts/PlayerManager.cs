@@ -27,6 +27,7 @@ public class PlayerManager : MonoBehaviour
         {
             // Level up and reset experience
             Level++;
+            GameObject.FindObjectOfType<EnemySpawner>().ResetSpawner(Level);
             SkillPoints++;
             Experience -= ExperienceToLevelUp;
             ExperienceToLevelUp = Mathf.RoundToInt(ExperienceToLevelUp * 1.1f); // Increase experience needed to level up by 10%

@@ -33,6 +33,13 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    public void ResetSpawner(int level)
+    {
+        CancelInvoke("SpawnEnemy");
+        InvokeRepeating("SpawnEnemy", spawnDelay, spawnDelay / (1 + (level * 0.1f)));
+
+    }
+
     Vector3 GetRandomSpawnPosition()
     {
         // Get camera clamp dimensions
